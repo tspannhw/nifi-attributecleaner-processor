@@ -54,10 +54,13 @@ public class AttributeCleanerProcessorTest {
 			attributeMap.put("my.field.has.a.badname", "a");
 			attributeMap.put("goodname", "b");
 			attributeMap.put("1badname", "b");
+			attributeMap.put("pdf:PDFVersion", "PDF version 1.0sdfsdf : 5");
 			attributeMap.put("bad-Name", "b");
 			attributeMap.put("this-_.is.a.bad.name", "b");
-			attributeMap.put("_BadName", "b");
-			attributeMap.put(".BadName", "b");
+			attributeMap.put("_BadNameX", "ab");
+			attributeMap.put("_BadNameX", "bc");
+			attributeMap.put(".BadNameX", "dc");
+			attributeMap.put(".p:PDF:this.BadName", "basdfadsf sdf(D*F(*SD(F*( D*(*DS (*D(* *   (D*F (*DF(SD");
 			testRunner.enqueue(new FileInputStream(new File("src/test/resources/d.pdf")), attributeMap);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

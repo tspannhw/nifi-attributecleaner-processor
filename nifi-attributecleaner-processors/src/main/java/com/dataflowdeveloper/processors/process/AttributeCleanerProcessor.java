@@ -100,28 +100,12 @@ public class AttributeCleanerProcessor extends AbstractProcessor {
 			{
 				tempKey = entry.getKey().replaceFirst("[^A-Za-z]", "");
 				tempKey = tempKey.replaceAll("[^A-Za-z0-9_]", "");
+				tempKey = tempKey.replaceAll("\\:", "");
+				tempKey = tempKey.replaceAll("\\.", "");
 			    attributesClean.put(tempKey, entry.getValue());
 			    session.removeAttribute(flowFile, entry.getKey());
 			}
 		
-
-			// flowFile = session.putAttribute(flowFile, "mime.type", "application/json");
-			// flowFile = session.write(flowFile, new StreamCallback() {
-			// @Override
-			// public void process(InputStream inputStream, OutputStream outputStream)
-			// throws IOException {
-			// Tika tika = new Tika();
-			// String text = "";
-			// try {
-			// text = tika.parseToString(inputStream);
-			// } catch (TikaException e) {
-			// getLogger().error("Failed to parse input " + e.getLocalizedMessage());
-			// e.printStackTrace();
-			// }
-			//
-			// outputStream.write(text.getBytes());
-			// }
-			// });
 			session.putAllAttributes(flowFile, attributesClean);
 			session.transfer(flowFile, REL_SUCCESS);
 			session.commit();
